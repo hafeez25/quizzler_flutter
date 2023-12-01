@@ -52,6 +52,13 @@ class _QuizPage extends State<QuizPage> {
       color: Colors.red,
     ),
   ];
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.'
+  ];
+  int track = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,13 +73,13 @@ class _QuizPage extends State<QuizPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                const Expanded(
+                 Expanded(
                   flex: 5,
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Center(
                       child: Text(
-                        'This is where the question text will go.',
+                        questions[track],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25.0,
@@ -100,6 +107,7 @@ class _QuizPage extends State<QuizPage> {
                       ),
                       onPressed: () {
                         setState(() {
+                          track++;
                           scoreKeeper.add(
                            const Icon(
                               Icons.check,
@@ -127,7 +135,17 @@ class _QuizPage extends State<QuizPage> {
                           color: Colors.white,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          track++;
+                          scoreKeeper.add(
+                              const Icon(
+                                Icons.close,
+                                color: Colors.red,
+                              )
+                          );
+                        });
+                      },
                     ),
                   ),
                 ),
