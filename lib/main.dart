@@ -30,6 +30,28 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPage extends State<QuizPage> {
+  List<Icon> scoreKeeper = [
+    Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +66,7 @@ class _QuizPage extends State<QuizPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-              const  Expanded(
+                const Expanded(
                   flex: 5,
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
@@ -76,7 +98,16 @@ class _QuizPage extends State<QuizPage> {
                           color: Colors.white,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          scoreKeeper.add(
+                           const Icon(
+                              Icons.check,
+                              color: Colors.green,
+                            )
+                          );
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -87,7 +118,6 @@ class _QuizPage extends State<QuizPage> {
                       style: TextButton.styleFrom(
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
-
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.zero))),
                       child: const Text(
@@ -101,6 +131,9 @@ class _QuizPage extends State<QuizPage> {
                     ),
                   ),
                 ),
+                Row(
+                  children: scoreKeeper,
+                )
               ],
             ),
           ),
