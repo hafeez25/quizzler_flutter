@@ -57,7 +57,7 @@ class _QuizPage extends State<QuizPage> {
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.'
   ];
-  int track = 0;
+  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _QuizPage extends State<QuizPage> {
                     padding: EdgeInsets.all(10.0),
                     child: Center(
                       child: Text(
-                        questions[track],
+                        questions[questionNumber],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25.0,
@@ -107,7 +107,7 @@ class _QuizPage extends State<QuizPage> {
                       ),
                       onPressed: () {
                         setState(() {
-                          track++;
+                          questionNumber++;
                           scoreKeeper.add(
                            const Icon(
                               Icons.check,
@@ -137,7 +137,7 @@ class _QuizPage extends State<QuizPage> {
                       ),
                       onPressed: () {
                         setState(() {
-                          track++;
+                          questionNumber++;
                           scoreKeeper.add(
                               const Icon(
                                 Icons.close,
