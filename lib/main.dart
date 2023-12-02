@@ -35,25 +35,22 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPage extends State<QuizPage> {
   int questionNumber = 0;
-  List<Icon> scoreKeeper = [
+  List<Icon> scoreKeeper = [];
 
-  ];
-
-  void checkAnswer(bool userPickedAnswer){
+  void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getCorrectAnswer();
 
-
     setState(() {
-      if(quizBrain.isQuizFinished()){
+      if (quizBrain.isQuizFinished()) {
         _onCustomAnimationAlertPressed(context);
         scoreKeeper.clear();
         quizBrain.resetQuiz();
-      }else if(correctAnswer == userPickedAnswer){
+      } else if (correctAnswer == userPickedAnswer) {
         scoreKeeper.add(const Icon(
           Icons.check,
           color: Colors.green,
         ));
-      }else{
+      } else {
         scoreKeeper.add(const Icon(
           Icons.close,
           color: Colors.red,
@@ -73,11 +70,11 @@ class _QuizPage extends State<QuizPage> {
   }
 
   Widget fadeAlertAnimation(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      Widget child,
-      ) {
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
     return Align(
       child: FadeTransition(
         opacity: animation,
@@ -85,8 +82,6 @@ class _QuizPage extends State<QuizPage> {
       ),
     );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +130,7 @@ class _QuizPage extends State<QuizPage> {
                         ),
                       ),
                       onPressed: () {
-                       checkAnswer(true);
+                        checkAnswer(true);
                       },
                     ),
                   ),
@@ -157,7 +152,7 @@ class _QuizPage extends State<QuizPage> {
                         ),
                       ),
                       onPressed: () {
-                      checkAnswer(false);
+                        checkAnswer(false);
                       },
                     ),
                   ),
