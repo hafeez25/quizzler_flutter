@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:quizzler/quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain();
@@ -40,20 +41,49 @@ class _QuizPage extends State<QuizPage> {
 
   void checkAnswer(bool userPickedAnswer){
     bool correctAnswer = quizBrain.getCorrectAnswer();
-    if(correctAnswer == userPickedAnswer){
-      scoreKeeper.add(const Icon(
-        Icons.check,
-        color: Colors.green,
-      ));
-    }else{
-      scoreKeeper.add(const Icon(
-        Icons.close,
-        color: Colors.red,
-      ));
-    }
+
+
     setState(() {
+      if(quizBrain.isQuizFinished()){
+        _onCustomAnimationAlertPressed(context);
+        scoreKeeper.clear();
+        quizBrain.resetQuiz();
+      }else if(correctAnswer == userPickedAnswer){
+        scoreKeeper.add(const Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      }else{
+        scoreKeeper.add(const Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
       quizBrain.nextQuestion();
     });
+  }
+
+  _onCustomAnimationAlertPressed(context) {
+    Alert(
+      context: context,
+      title: "Quiz Conclusion",
+      desc: "Great job! Your intellectual journey ends here.",
+      alertAnimation: fadeAlertAnimation,
+    ).show();
+  }
+
+  Widget fadeAlertAnimation(
+      BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      Widget child,
+      ) {
+    return Align(
+      child: FadeTransition(
+        opacity: animation,
+        child: child,
+      ),
+    );
   }
 
 
