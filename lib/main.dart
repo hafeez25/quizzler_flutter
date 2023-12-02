@@ -35,7 +35,26 @@ class QuizPage extends StatefulWidget {
 class _QuizPage extends State<QuizPage> {
   int questionNumber = 0;
   List<Icon> scoreKeeper = [
+
   ];
+
+  void checkAnswer(bool userPickedAnswer){
+    bool correctAnswer = quizBrain.getCorrectAnswer();
+    if(correctAnswer == userPickedAnswer){
+      scoreKeeper.add(const Icon(
+        Icons.check,
+        color: Colors.green,
+      ));
+    }else{
+      scoreKeeper.add(const Icon(
+        Icons.close,
+        color: Colors.red,
+      ));
+    }
+    setState(() {
+      quizBrain.nextQuestion();
+    });
+  }
 
 
 
@@ -86,19 +105,7 @@ class _QuizPage extends State<QuizPage> {
                         ),
                       ),
                       onPressed: () {
-                        bool correctAnswer = quizBrain.getCorrectAnswer();
-                        if(correctAnswer == true){
-                          print('You have got right');
-                        }else{
-                          print('you have got wrong');
-                        }
-                        setState(() {
-                          quizBrain.nextQuestion();
-                          scoreKeeper.add(const Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ));
-                        });
+                       checkAnswer(true);
                       },
                     ),
                   ),
@@ -120,19 +127,7 @@ class _QuizPage extends State<QuizPage> {
                         ),
                       ),
                       onPressed: () {
-                        bool correctAnswer = quizBrain.getCorrectAnswer();
-                        if(correctAnswer == false){
-                          print('You have got right');
-                        }else{
-                          print('you have got wrong');
-                        }
-                        setState(() {
-                          quizBrain.nextQuestion();
-                          scoreKeeper.add(const Icon(
-                            Icons.close,
-                            color: Colors.red,
-                          ));
-                        });
+                      checkAnswer(false);
                       },
                     ),
                   ),
