@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +33,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPage extends State<QuizPage> {
+  int questionNumber = 0;
   List<Icon> scoreKeeper = [
     Icon(
       Icons.check,
@@ -52,12 +56,8 @@ class _QuizPage extends State<QuizPage> {
       color: Colors.red,
     ),
   ];
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
-  ];
-  int questionNumber = 0;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +73,14 @@ class _QuizPage extends State<QuizPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                 Expanded(
+                Expanded(
                   flex: 5,
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Center(
                       child: Text(
-                        questions[questionNumber],
+                        quizBrain.questionBank[questionNumber].questionText,
+
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25.0,
@@ -106,14 +107,18 @@ class _QuizPage extends State<QuizPage> {
                         ),
                       ),
                       onPressed: () {
+                        bool correctAnswer = quizBrain.questionBank[questionNumber].questionAnswer;
+                        if(correctAnswer == true){
+                          print('You have got right');
+                        }else{
+                          print('you have got wrong');
+                        }
                         setState(() {
                           questionNumber++;
-                          scoreKeeper.add(
-                           const Icon(
-                              Icons.check,
-                              color: Colors.green,
-                            )
-                          );
+                          scoreKeeper.add(const Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ));
                         });
                       },
                     ),
@@ -136,14 +141,18 @@ class _QuizPage extends State<QuizPage> {
                         ),
                       ),
                       onPressed: () {
+                        bool correctAnswer = quizBrain.questionBank[questionNumber].questionAnswer;
+                        if(correctAnswer == false){
+                          print('You have got right');
+                        }else{
+                          print('you have got wrong');
+                        }
                         setState(() {
                           questionNumber++;
-                          scoreKeeper.add(
-                              const Icon(
-                                Icons.close,
-                                color: Colors.red,
-                              )
-                          );
+                          scoreKeeper.add(const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ));
                         });
                       },
                     ),
