@@ -79,7 +79,7 @@ class _QuizPage extends State<QuizPage> {
                     padding: EdgeInsets.all(10.0),
                     child: Center(
                       child: Text(
-                        quizBrain.getQuestionText(questionNumber),
+                        quizBrain.getQuestionText(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25.0,
@@ -106,14 +106,14 @@ class _QuizPage extends State<QuizPage> {
                         ),
                       ),
                       onPressed: () {
-                        bool correctAnswer = quizBrain.getCorrectAnswer(questionNumber);
+                        bool correctAnswer = quizBrain.getCorrectAnswer();
                         if(correctAnswer == true){
                           print('You have got right');
                         }else{
                           print('you have got wrong');
                         }
                         setState(() {
-                          questionNumber++;
+                          quizBrain.nextQuestion();
                           scoreKeeper.add(const Icon(
                             Icons.check,
                             color: Colors.green,
@@ -140,14 +140,14 @@ class _QuizPage extends State<QuizPage> {
                         ),
                       ),
                       onPressed: () {
-                        bool correctAnswer = quizBrain.getCorrectAnswer(questionNumber);
+                        bool correctAnswer = quizBrain.getCorrectAnswer();
                         if(correctAnswer == false){
                           print('You have got right');
                         }else{
                           print('you have got wrong');
                         }
                         setState(() {
-                          questionNumber++;
+                          quizBrain.nextQuestion();
                           scoreKeeper.add(const Icon(
                             Icons.close,
                             color: Colors.red,
